@@ -13,7 +13,8 @@ namespace SportsStore
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).UseDefaultServiceProvider(options => options.ValidateScopes=false)
+            CreateHostBuilder(args).UseDefaultServiceProvider(
+                    options => options.ValidateScopes=false)
                 .Build().Run();
 
         }

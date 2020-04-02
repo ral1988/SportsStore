@@ -25,7 +25,7 @@ namespace SportsStore
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration["Data:SportStoreProducts:ConnectionString"]));
+                    Configuration["Data:SportsStoreString"]));
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
         }

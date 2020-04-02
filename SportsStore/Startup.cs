@@ -32,7 +32,7 @@ namespace SportsStore
             {
                 routes.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller = Product}/{action = List}/{id ?}");
+                    pattern: "{controller=Product}/{action=List}/{id?}");
             });
         }
     }

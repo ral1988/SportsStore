@@ -30,7 +30,9 @@ namespace SportsStore
             app.UseRouting();
             app.UseEndpoints(routes =>
             {
-
+                routes.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller = Product}/{action = List}/{id ?}");
             });
         }
     }

@@ -11,6 +11,7 @@ namespace SportsStore.Infrastructure
     public class PageLinkTagHelper : TagHelper 
     {
         private IUrlHelperFactory urlHelperFactory;
+
         public PageLinkTagHelper(IUrlHelperFactory helperFactory) 
         {
             urlHelperFactory = helperFactory;

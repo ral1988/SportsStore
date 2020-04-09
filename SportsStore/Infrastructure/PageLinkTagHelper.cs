@@ -11,11 +11,11 @@ namespace SportsStore.Infrastructure
 
     public class PageLinkTagHelper : TagHelper 
     {
-        private IUrlHelperFactory urlHelperFactory;
+        private IUrlHelperFactory _urlHelperFactory;
 
         public PageLinkTagHelper(IUrlHelperFactory helperFactory) 
         {
-            urlHelperFactory = helperFactory;
+            _urlHelperFactory = helperFactory;
         }
         
         [ViewContext]
@@ -39,7 +39,7 @@ namespace SportsStore.Infrastructure
         public override void Process(TagHelperContext context,
             TagHelperOutput output) 
         {
-            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+            IUrlHelper urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
         
             TagBuilder result = new TagBuilder("div");
             

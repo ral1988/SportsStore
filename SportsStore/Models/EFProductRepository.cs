@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace SportsStore.Models
 {
-    public class EFProductRepository : IProductRepository
+    public class EfProductRepository : IProductRepository
     {
-        private ApplicationDbContext context;
+        private ApplicationDbContext _context;
 
-        public EFProductRepository(ApplicationDbContext ctx)
+        public EfProductRepository(ApplicationDbContext ctx)
         {
-            context = ctx;
+            _context = ctx;
         }
 
-        public IQueryable<Product> Products => context.Products;
+        public IQueryable<Product> Products => _context.Products;
     }
 }

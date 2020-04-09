@@ -4,13 +4,18 @@ using Moq;
 using SportsStore.Controllers;
 using SportsStore.Models;
 using Xunit;
+
 namespace SportsStore.Tests {
-    public class ProductControllerTests {
+
+    public class ProductControllerTests 
+    {
         [Fact]
-        public void Can_Paginate() {
-// Arrange
+        public void Can_Paginate() 
+        {
+            // Arrange
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.Products).Returns((new Product[] {
+            mock.Setup(m => m.Products).Returns((new Product[] 
+            {
                 new Product {ProductID = 1, Name = "P1"},
                 new Product {ProductID = 2, Name = "P2"},
                 new Product {ProductID = 3, Name = "P3"},
@@ -19,10 +24,12 @@ namespace SportsStore.Tests {
             }).AsQueryable<Product>());
             ProductController controller = new ProductController(mock.Object);
             controller.PageSize = 3;
-// Act
+
+            // Act
             IEnumerable<Product> result =
                 controller.List(2).ViewData.Model as IEnumerable<Product>;
-// Assert
+
+            // Assert
             Product[] prodArray = result.ToArray();
             Assert.True(prodArray.Length == 2);
             Assert.Equal("P4", prodArray[0].Name);

@@ -50,8 +50,7 @@ namespace SportsStore
                 (
                     name: null,
                     pattern: "Page{productPage:int}",
-                    defaults: new
-                    {controller = "Product", action = "List", productPage = 1}
+                    defaults: new {controller = "Product", action = "List", productPage = 1}
                 );
 
                 routes.MapControllerRoute

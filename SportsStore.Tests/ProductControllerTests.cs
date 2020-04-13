@@ -8,13 +8,16 @@ using Xunit;
 
 namespace SportsStore.Tests {
 
-    public class ProductControllerTests 
+    public class ProductControllerTests
     {
+
         [Fact]
-        public void Can_Send_Pagination_View_Model() {
+        public void Can_Send_Pagination_View_Model()
+        {
 // Arrange
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.Products).Returns((new Product[] {
+            mock.Setup(m => m.Products).Returns((new Product[]
+            {
                 new Product {ProductId = 1, Name = "P1"},
                 new Product {ProductId = 2, Name = "P2"},
                 new Product {ProductId = 3, Name = "P3"},
@@ -23,13 +26,43 @@ namespace SportsStore.Tests {
             }).AsQueryable<Product>());
 // Arrange
             ProductController controller =
-                new ProductController(mock.Object) { PageSize = 3 };
+                new ProductController(mock.Object) {PageSize = 3};
 // Act
             ProductsListViewModel result =
-                controller.List(null,2).ViewData.Model as ProductsListViewModel;
+                controller.List(null, 2).ViewData.Model as ProductsListViewModel;
 // Assert
             PagingInfo pageInfo = result.PagingInfo;
 
+
+
+
+        }
+
+        [Fact]
+        public void Can_Filter_Products()
+        {
+// Arrange
+// - create the mock repository
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns((new Product[]
+            {
+                new Product {ProductId = 1, Name = "P1", Category = "Cat1"},
+                new Product {ProductId = 2, Name = "P2", Category = "Cat2"},
+                new Product {ProductId = 3, Name = "P3", Category = "Cat1"},
+                new Product {ProductId = 4, Name = "P4", Category = "Cat2"},
+                new Product {ProductId = 5, Name = "P5", Category = "Cat3"}
+                }).AsQueryable<Product>());
+// Arrange - create a controller and make the page size 3 items
+                ProductController controller = new ProductController(mock.Object);
+                controller.PageSize = 3;
+// Action
+                Product[] result =
+                (controller.List("Cat2", 1).ViewData.Model as ProductsListViewModel)
+                .Products.ToArray();
+// Assert
+                Assert.Equal(2, result.Length);
+                Assert.True(result[0].Name == "P2" && result[0].Category == "Cat2");
+                Assert.True(result[1].Name == "P4" && result[1].Category == "Cat2");
+            }
         }
     }
-}

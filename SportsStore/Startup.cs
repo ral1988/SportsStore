@@ -40,17 +40,42 @@ namespace SportsStore
             app.UseEndpoints(routes =>
             {
                 routes.MapControllerRoute
+                    (
+                    name: null,
+                    pattern:"{category}/Page{productPage:int}",
+                    defaults: new {controller = "Product", action =  "List" }
+                );
+
+                routes.MapControllerRoute
+                    (
+                    name: null,
+                    pattern: "Page{productPage:int}",
+                    defaults: new
+                    {
+                        controller = "Product",
+                        action = "List", productPage = 1}
+                    );
+
+                routes.MapControllerRoute
                 (
-                    name: "pagination",
-                    pattern: "Products/Page{productPage}",
-                    defaults: new {Controller="Product", action = "List"}
+                    name: null,
+                    pattern: "{category}",
+                    defaults: new
+                    {
+                        controller = "Product",
+                        action = "List", productPage = 1}
                 );
 
                 routes.MapControllerRoute
                 (
-                    name: "default",
-                    pattern: "{controller=Product}/{action=List}/{id?}"
+                    name: null,
+                    pattern: "",
+                    defaults: new
+                    {
+                        controller = "Product",
+                        action = "List", productPage = 1}
                 );
+                
             });
             SeedData.EnsurePopulated(app);
         }

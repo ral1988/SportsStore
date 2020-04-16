@@ -42,7 +42,7 @@ namespace SportsStore.Tests
             target.AddItem(p2, 1);
             target.AddItem(p1, 10);
             CartLine[] results = target.Lines
-                .OrderBy(c => c.Product.ProductId.ToArray(); 
+                .OrderBy(c => c.Product.ProductId).ToArray(); 
             
             // Assert
             Assert.Equal(2, results.Length);

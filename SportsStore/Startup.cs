@@ -15,8 +15,6 @@ namespace SportsStore
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
@@ -27,7 +25,8 @@ namespace SportsStore
                 options.UseSqlServer(
                     Configuration["Data:SportsStoreProduct"]));
             services.AddTransient<IProductRepository, EfProductRepository>();
-            services.AddMvc();
+
+            services.AddMvc().AddNewtonsoftJson();
             services.AddMemoryCache();
             services.AddSession();
         }
